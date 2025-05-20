@@ -6,11 +6,17 @@ from player import Player
 def main():
     pygame.init()
     pygame.display.set_caption("Asteroids")
+
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    clock = pygame.time.Clock()
-    dt = 0
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
+    clock = pygame.time.Clock()
+    dt = 0
 
     while True:
         for event in pygame.event.get():
@@ -19,8 +25,10 @@ def main():
 
         screen.fill((0, 0, 0))
 
-        player.update(dt)
-        player.draw(screen)
+        updatable.update(dt)
+        
+        for sprite in drawable:
+            sprite.draw(screen)
 
         pygame.display.flip()
         
