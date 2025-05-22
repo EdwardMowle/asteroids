@@ -1,11 +1,11 @@
 import pygame
 from circleshape import CircleShape 
-from constants import SHOT_RADIUS, SHOT_SPEED
+from constants import BOLT_RADIUS, BOLT_SPEED
 
-class Shot(CircleShape):
+class Bolt(CircleShape):
     def __init__(self, x, y, rotation, primed = False):
-        super().__init__(x, y, SHOT_RADIUS)
-        self.velocity = pygame.Vector2(0, 1).rotate(rotation) * SHOT_SPEED
+        super().__init__(x, y, BOLT_RADIUS)
+        self.velocity = pygame.Vector2(0, 1).rotate(rotation) * BOLT_SPEED
         self.primed = primed
 
     def update(self, dt):

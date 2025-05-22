@@ -1,6 +1,6 @@
 import pygame
 from circleshape import CircleShape 
-from shot import Shot
+from bolt import Bolt
 from constants import SCREEN_WIDTH, PLAYER_RADIUS, PLAYER_SPEED, PLAYER_TURN_SPEED
 
 class Player(CircleShape):
@@ -50,7 +50,7 @@ class Player(CircleShape):
         if self.weapon_heat >= 1:
             self.__weapon_overheat()
 
-        Shot(
+        Bolt(
             x= self.position.x, 
             y= self.position.y, 
             rotation = self.rotation,
