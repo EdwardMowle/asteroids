@@ -50,7 +50,7 @@ def main():
                 sys.exit()
             for bolt in bolts:
                 if asteroid.is_colliding_with(bolt):
-                    asteroid.kill()
+                    asteroid.impact(bolt)
 
         screen.fill((0, 0, 0))
         
