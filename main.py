@@ -3,6 +3,7 @@ import pygame
 
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from player import Player
+from shot import Shot
 from asteroidfield import AsteroidField
 from asteroid import Asteroid
 
@@ -16,14 +17,15 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
 
+    Player.containers = (updatable, drawable)
+    Shot.containers = (updatable, drawable)
+    
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
     AsteroidField.containers = (updatable)
     Asteroid.containers = (asteroids, updatable, drawable)
 
     asteroid_field = AsteroidField()
-
-    Player.containers = (updatable, drawable)
-    
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
     clock = pygame.time.Clock()
     dt = 0
@@ -31,9 +33,11 @@ def main():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    player.shoot()
 
-        screen.fill((0, 0, 0))
 
         updatable.update(dt)
         
@@ -42,6 +46,8 @@ def main():
                 print("Game over!")
                 sys.exit()
 
+        screen.fill((0, 0, 0))
+        
         for sprite in drawable:
             sprite.draw(screen)
 
